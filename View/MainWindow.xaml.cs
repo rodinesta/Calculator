@@ -26,8 +26,8 @@ namespace TRPO1
     public partial class MainWindow : Window
     {
         private string currentOperator;
-        private double leftOperand;
-        private double rightOperand;
+        private string leftOperand;
+        private string rightOperand;
         private int currentNotation;
         private int leftNotation;
         private int rightNotation;
@@ -56,7 +56,7 @@ namespace TRPO1
                 else
                 {
                     currentOperator = op;
-                    leftOperand = double.Parse(txtResult.Text);
+                    leftOperand = txtResult.Text;
                     txtResult.Text = "";
                     leftNotation = currentNotation;
                     currentNotation = 0;
@@ -66,9 +66,9 @@ namespace TRPO1
             else
             {
                 
-                rightOperand = double.Parse(txtResult.Text);
+                rightOperand = txtResult.Text;
                 rightNotation = currentNotation;
-                double result = 0;
+                string result = "0";
 
                 switch (rightNotation)
                 {
@@ -76,23 +76,23 @@ namespace TRPO1
                         switch (currentOperator)
                         {
                             case "+":
-                                result = double.Parse(Add(leftOperand.ToString(), rightOperand.ToString()));
+                                result = Add(leftOperand, rightOperand);
                                 break;
 
                             case "-":
-                                result = double.Parse(Subtract(leftOperand.ToString(), rightOperand.ToString()));
+                                result = Subtract(leftOperand, rightOperand);
                                 break;
 
                             case "*":
-                                result = double.Parse(Multiply(leftOperand.ToString(), rightOperand.ToString()));
+                                result = Multiply(leftOperand, rightOperand);
                                 break;
 
                             case "/":
-                                result = double.Parse(Divide(leftOperand.ToString(), rightOperand.ToString()));
+                                result = Divide(leftOperand, rightOperand);
                                 break;
 
                             case "mod":
-                                result = double.Parse(Modulo(leftOperand.ToString(), rightOperand.ToString()));
+                                result = Modulo(leftOperand, rightOperand);
                                 break;
                         }
                         break;
@@ -100,23 +100,23 @@ namespace TRPO1
                         switch (currentOperator)
                         {
                             case "+":
-                                result = double.Parse(AddOctal(leftOperand.ToString(), rightOperand.ToString()));
+                                result = AddOctal(leftOperand, rightOperand);
                                 break;
 
                             case "-":
-                                result = double.Parse(SubtractOctal(leftOperand.ToString(), rightOperand.ToString()));
+                                result = SubtractOctal(leftOperand, rightOperand);
                                 break;
 
                             case "*":
-                                result = double.Parse(MultiplyOctal(leftOperand.ToString(), rightOperand.ToString()));
+                                result = MultiplyOctal(leftOperand, rightOperand);
                                 break;
 
                             case "/":
-                                result = double.Parse(DivideOctal(leftOperand.ToString(), rightOperand.ToString()));
+                                result = DivideOctal(leftOperand, rightOperand);
                                 break;
 
                             case "mod":
-                                result = double.Parse(ModuloOctal(leftOperand.ToString(), rightOperand.ToString()));
+                                result = ModuloOctal(leftOperand, rightOperand);
                                 break;
                         }
                         break;
@@ -124,19 +124,19 @@ namespace TRPO1
                         switch (currentOperator)
                         {
                             case "+":
-                                result = leftOperand + rightOperand;
+                                result = (int.Parse(leftOperand) + int.Parse(rightOperand)).ToString();
                                 break;
                             case "-":
-                                result = leftOperand - rightOperand;
+                                result = (int.Parse(leftOperand) - int.Parse(rightOperand)).ToString();
                                 break;
                             case "*":
-                                result = leftOperand * rightOperand;
+                                result = (int.Parse(leftOperand) * int.Parse(rightOperand)).ToString();
                                 break;
                             case "/":
-                                result = leftOperand / rightOperand;
+                                result = (int.Parse(leftOperand) / int.Parse(rightOperand)).ToString();
                                 break;
                             case "mod":
-                                result = leftOperand % rightOperand;
+                                result = (int.Parse(leftOperand) % int.Parse(rightOperand)).ToString();
                                 break;
                         }
                         break;
@@ -144,33 +144,33 @@ namespace TRPO1
                         switch (currentOperator)
                         {
                             case "+":
-                                result = double.Parse(HexAddition(leftOperand.ToString(), rightOperand.ToString()));
+                                result = HexAddition(leftOperand, rightOperand);
                                 break;
 
                             case "-":
-                                result = double.Parse(HexSubtraction(leftOperand.ToString(), rightOperand.ToString()));
+                                result = HexSubtraction(leftOperand, rightOperand);
                                 break;
 
                             case "*":
-                                result = double.Parse(HexMultiplication(leftOperand.ToString(), rightOperand.ToString()));
+                                result = HexMultiplication(leftOperand, rightOperand);
                                 break;
 
                             case "/":
-                                result = double.Parse(HexDivision(leftOperand.ToString(), rightOperand.ToString()));
+                                result = HexDivision(leftOperand, rightOperand);
                                 break;
 
                             case "mod":
-                                result = double.Parse(HexModulo(leftOperand.ToString(), rightOperand.ToString()));
+                                result = HexModulo(leftOperand, rightOperand);
                                 break;
                         }
                         break;
                 }
 
                 txtResult.Text = result.ToString();
-                leftOperand = result;
+                leftOperand = result.ToString();
                 currentNotation = 0;
                 ClearRadioButtons();
-                rightOperand = 0;
+                rightOperand = "0";
                 currentOperator = op;
                 txtResult.Text = "";
             }
@@ -185,109 +185,109 @@ namespace TRPO1
                     MessageBox.Show("Введите число и выберите систему счисления");
                 } else
                 {
-                    rightOperand = double.Parse(txtResult.Text);
+                    rightOperand = txtResult.Text;
                     rightNotation = currentNotation;
-                    double result = 0;
+                    string result = "0";
 
                     if (leftNotation != rightNotation)
                     {
-                        leftOperand = double.Parse(Convert(leftOperand.ToString(), leftNotation, currentNotation));
+                        leftOperand = Convert(leftOperand, leftNotation, currentNotation);
                     }
             
                     switch (rightNotation)
                     {
                         case 2:
-                            switch (currentOperator)
-                            {
-                                case "+":
-                                    result = double.Parse(Add(leftOperand.ToString(), rightOperand.ToString()));
-                                    break;
-            
-                                case "-":
-                                    result = double.Parse(Subtract(leftOperand.ToString(), rightOperand.ToString()));
-                                    break;
-            
-                                case "*":
-                                    result = double.Parse(Multiply(leftOperand.ToString(), rightOperand.ToString()));
-                                    break;
-            
-                                case "/":
-                                    result = double.Parse(Divide(leftOperand.ToString(), rightOperand.ToString()));
-                                    break;
-            
-                                case "mod":
-                                    result = double.Parse(Modulo(leftOperand.ToString(), rightOperand.ToString()));
-                                    break;
-                            }
-                            break;
-                        case 8:
-                            switch (currentOperator)
-                            {
-                                case "+":
-                                    result = double.Parse(AddOctal(leftOperand.ToString(), rightOperand.ToString()));
-                                    break;
-            
-                                case "-":
-                                    result = double.Parse(SubtractOctal(leftOperand.ToString(), rightOperand.ToString()));
-                                    break;
-            
-                                case "*":
-                                    result = double.Parse(MultiplyOctal(leftOperand.ToString(), rightOperand.ToString()));
-                                    break;
-            
-                                case "/":
-                                    result = double.Parse(DivideOctal(leftOperand.ToString(), rightOperand.ToString()));
-                                    break;
-            
-                                case "mod":
-                                    result = double.Parse(ModuloOctal(leftOperand.ToString(), rightOperand.ToString()));
-                                    break;
-                            }
-                            break;
-                        case 10:
-                            switch (currentOperator)
-                            {
-                                case "+":
-                                    result = leftOperand + rightOperand;
-                                    break;
-                                case "-":
-                                    result = leftOperand - rightOperand;
-                                    break;
-                                case "*":
-                                    result = leftOperand * rightOperand;
-                                    break;
-                                case "/":
-                                    result = leftOperand / rightOperand;
-                                    break;
-                                case "mod":
-                                    result = leftOperand % rightOperand;
-                                    break;
-                            }
-                            break;
-                        case 16:
-                            switch (currentOperator)
-                            {
-                                case "+":
-                                    result = double.Parse(HexAddition(leftOperand.ToString(), rightOperand.ToString()));
-                                    break;
-            
-                                case "-":
-                                    result = double.Parse(HexSubtraction(leftOperand.ToString(), rightOperand.ToString()));
-                                    break;
-            
-                                case "*":
-                                    result = double.Parse(HexMultiplication(leftOperand.ToString(), rightOperand.ToString()));
-                                    break;
-            
-                                case "/":
-                                    result = double.Parse(HexDivision(leftOperand.ToString(), rightOperand.ToString()));
-                                    break;
-            
-                                case "mod":
-                                    result = double.Parse(HexModulo(leftOperand.ToString(), rightOperand.ToString()));
-                                    break;
-                            }
-                            break;
+                        switch (currentOperator)
+                        {
+                            case "+":
+                                result = Add(leftOperand, rightOperand);
+                                break;
+
+                            case "-":
+                                result = Subtract(leftOperand, rightOperand);
+                                break;
+
+                            case "*":
+                                result = Multiply(leftOperand, rightOperand);
+                                break;
+
+                            case "/":
+                                result = Divide(leftOperand, rightOperand);
+                                break;
+
+                            case "mod":
+                                result = Modulo(leftOperand, rightOperand);
+                                break;
+                        }
+                        break;
+                    case 8:
+                        switch (currentOperator)
+                        {
+                            case "+":
+                                result = AddOctal(leftOperand, rightOperand);
+                                break;
+
+                            case "-":
+                                result = SubtractOctal(leftOperand, rightOperand);
+                                break;
+
+                            case "*":
+                                result = MultiplyOctal(leftOperand, rightOperand);
+                                break;
+
+                            case "/":
+                                result = DivideOctal(leftOperand, rightOperand);
+                                break;
+
+                            case "mod":
+                                result = ModuloOctal(leftOperand, rightOperand);
+                                break;
+                        }
+                        break;
+                    case 10:
+                        switch (currentOperator)
+                        {
+                            case "+":
+                                result = (int.Parse(leftOperand) + int.Parse(rightOperand)).ToString();
+                                break;
+                            case "-":
+                                result = (int.Parse(leftOperand) - int.Parse(rightOperand)).ToString();
+                                break;
+                            case "*":
+                                result = (int.Parse(leftOperand) * int.Parse(rightOperand)).ToString();
+                                break;
+                            case "/":
+                                result = (int.Parse(leftOperand) / int.Parse(rightOperand)).ToString();
+                                break;
+                            case "mod":
+                                result = (int.Parse(leftOperand) % int.Parse(rightOperand)).ToString();
+                                break;
+                        }
+                        break;
+                    case 16:
+                        switch (currentOperator)
+                        {
+                            case "+":
+                                result = HexAddition(leftOperand, rightOperand);
+                                break;
+
+                            case "-":
+                                result = HexSubtraction(leftOperand, rightOperand);
+                                break;
+
+                            case "*":
+                                result = HexMultiplication(leftOperand, rightOperand);
+                                break;
+
+                            case "/":
+                                result = HexDivision(leftOperand, rightOperand);
+                                break;
+
+                            case "mod":
+                                result = HexModulo(leftOperand, rightOperand);
+                                break;
+                        }
+                        break;
                     }
             
                     txtResult.Text = result.ToString();
@@ -314,7 +314,7 @@ namespace TRPO1
                     }
                     
                     leftOperand = result;
-                    rightOperand = 0;
+                    rightOperand = "0";
                     currentOperator = null;
                 }
             }
@@ -332,10 +332,10 @@ namespace TRPO1
         private void btnClear_Click(object sender, RoutedEventArgs e)
         {
             txtResult.Text = "";
-            leftOperand = 0;
+            leftOperand = "0";
             leftNotation = 0;
             rightNotation = 0;
-            rightOperand = 0;
+            rightOperand = "0";
             currentOperator = null;
             ClearRadioButtons();
         }

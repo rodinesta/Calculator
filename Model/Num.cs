@@ -8,11 +8,11 @@ namespace TRPO1.Entities;
 
 public partial class Num
 {
-    public double? FirstNumber { get; set; }
+    public string? FirstNumber { get; set; }
 
     public int? FirstNumberNotation { get; set; }
 
-    public double? SecondNumber { get; set; }
+    public string? SecondNumber { get; set; }
 
     public int? SecondNumberNotation { get; set; }
 
