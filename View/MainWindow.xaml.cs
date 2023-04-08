@@ -166,8 +166,8 @@ namespace TRPO1
                         break;
                 }
 
-                txtResult.Text = result.ToString();
-                leftOperand = result.ToString();
+                txtResult.Text = result;
+                leftOperand = result;
                 currentNotation = 0;
                 ClearRadioButtons();
                 rightOperand = "0";
